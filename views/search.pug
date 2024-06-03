@@ -1,0 +1,21 @@
+extends default
+
+block content
+    div
+        nav.navbar.bg-body-tertiary.bg-dark.border-bottom.border-body(data-bs-theme="dark")
+            .container
+                a.navbar-brand(href='http://localhost:3000')
+                    img.mx-3(src='https://cdn-icons-png.flaticon.com/512/3845/3845731.png' alt='Weather app' width='30' height='24')
+                    | My Weather Application
+    .row(class="row-cols-md-3 row-cols-1")
+        each val in obj.days
+            .card.ms-5.my-2.p-2.text-bg-info(style='width: 18rem;')
+                i.m-3.p-2.fa-solid.icons-change
+                .card-body
+                    h5.card-title #{obj.resolvedAddress} 
+                    p.card-text
+                        | #{val.description}
+                ul.list-group.list-group-flush
+                    li.list-group-item Temp: #{val.temp}
+                    li.list-group-item Maximum Temp: #{val.tempmax}
+                    li.list-group-item Feels Like: #{val.feelslike}
