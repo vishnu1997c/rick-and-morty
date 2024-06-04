@@ -7,6 +7,9 @@ block content
                 a.navbar-brand(href='http://localhost:3000')
                     img.mx-3(src='https://cdn-icons-png.flaticon.com/512/3845/3845731.png' alt='Weather app' width='30' height='24')
                     | My Weather Application
+                form.d-flex(role='search' action='/search' method='GET')
+                    input.form-control.me-2(type='search' placeholder='Search' aria-label='Search' name='q')
+                    button.btn.btn-outline-success(type='submit') Search
     .row(class="row-cols-md-3 row-cols-1")
         each val in obj.days
             .card.ms-5.my-2.p-2.text-bg-info(style='width: 18rem;')
@@ -19,3 +22,9 @@ block content
                     li.list-group-item Temp: #{val.temp}
                     li.list-group-item Maximum Temp: #{val.tempmax}
                     li.list-group-item Feels Like: #{val.feelslike}
+    div(class="container")
+        footer(class="py-3 my-4 d-flex flex-wrap justify-content-between align-items-center border-top ")
+            div(class="col-md-4 d-flex align-items-center")
+                a(class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1" href='http://localhost:3000')
+                    img.mx-3(src='https://cdn-icons-png.flaticon.com/512/3845/3845731.png' alt='Weather app' width='30' height='24')
+                    span(class="mb-3 mb-md-0 text-body-secondary") © 2024 Company, Inc
