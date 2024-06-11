@@ -1,5 +1,4 @@
 const axios = require("axios");
-const { json } = require("express");
 require("dotenv").config();
 
 
@@ -9,14 +8,14 @@ const getHomePage = async (req, res) => {
     });
 }
 
-const getSearch = async (req, res) => {
+const getCharacter = async (req, res) => {
     try {
-        const response = await axios.get(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/
-            ${req.query.q}?key=${process.env.API_KEY}`);
+        const response = await axios.get(`https://rickandmortyapi.com/api/character?page=${req.query.page}`);
         const obj = response.data; 
+        console.log(obj)
 
-        res.render("search", {
-            title: "Weather page",
+        res.render("home", {
+            title: "Rick and Morty Characters",
             obj
         })
     } catch(err) {
@@ -24,20 +23,23 @@ const getSearch = async (req, res) => {
     }
 }
 
-const getWeather = async (req, res) => {
+const singleCharacter = async (req, res) => {
     try {
-        const response = await axios.get(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/
-            ${req.query.q}?key=${process.env.API_KEY}`);
+        const response = await axios.get(`https://rickandmortyapi.com/api/character/${req.query.characterId}`);
         const obj = response.data; 
+        console.log(obj)
 
-        res.send(obj)
+        res.render("character", {
+            title: "Rick and Morty Characters",
+            obj
+        })
     } catch(err) {
         console.log(err);
     }
 }
 
+
 module.exports = {
-    getHomePage,
-    getSearch,
-    getWeather
+    getCharacter,
+    singleCharacter
 }

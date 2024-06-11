@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const {getHomePage, getSearch, getWeather} = require("../controllers/home");
+const {getCharacter, singleCharacter} = require("../controllers/home");
 
-router.route("/").get(getHomePage);
-router.route("/search").get(getSearch);
-router.route("/get-weather").get(getWeather);
+router.route("/").get(getCharacter);
+router.route("/character").get(singleCharacter);
 
 module.exports = router;

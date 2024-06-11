@@ -1,3 +1,61 @@
 extends default
 
 block content
+	head
+		meta(charset= "utf-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		title Rick and Morty Characters
+	body
+		div
+			div
+				nav(class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark")
+					div(class="container-fluid")
+						a(class="navbar-brand")
+							button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+							span.navbar-toggler-icon
+						#navbarSupportedContent.collapse.navbar-collapse
+							ul.navbar-nav.me-auto.mb-2.mb-lg-0
+								li.nav-item
+									a.nav-link.active(aria-current='page' href='#') Home
+							form.d-flex(role='search')
+								input.form-control.me-2(type='search' placeholder='Search' aria-label='Search')
+								button.btn.btn-outline-success(type='submit') Search
+			div(class="d-xl-flex flex-row m-2 p-2 justify-content-center row row-cols-2 g-4")
+				each val in obj.results
+					div.card.m-2.p-2.border-dark.text-bg-dark(style="width: 18rem;")
+						img(src=val.image)
+						.card-body
+							h5.card-title #{val.name}
+							p.card-text Species: #{val.species}
+							if val.type
+								p.card-text Type: #{val.type}
+							- const origins = val.origin;
+							if origins.url
+								p.card-text Name: #{origins.name}
+						.card-footer
+							- console.log(val)
+							a(href=`/character/?characterId=${val.id}` class="btn btn-primary") More Info
+				nav.d-flex.justify-content-center(aria-label="page navigation")
+					- let info = obj.info;
+					- let regex = /[?&]page=([^&]+)/;
+					- let nextPage = info.next;
+					- let prevPage = info.prev;
+					- let nextPageNumber = nextPage ? nextPage.match(regex) : 1;
+					- let prevPageNumber = prevPage ? prevPage.match(regex) : 1;
+	
+					ul.pagination
+						if info.prev
+							form.d-flex.p-2(role='search' action=`http://localhost:3001/?` method='GET')
+								input(type="hidden" name="page" value=prevPageNumber[1])
+								button(class="btn btn-primary" type="submit") Previous
+						else
+							li.page-item.disabled.p-2
+								a.page-link(href="#") Previous
+	
+						if info.next
+							form.d-flex.p-2(role='search' action=`http://localhost:3001/?` method='GET')
+								input(type="hidden" name="page" value=nextPageNumber[1])
+								button(class="btn btn-primary" type="submit") Next
+						else
+							li.page-item.disabled.p-2
+								a.page-link(href="#") Next
