@@ -8,22 +8,22 @@ $(document).ready(function() {
                 success: function(data) {
                     let resultsHtml = '';
                     data.forEach(function(character) {
-                        resultsHtml += `<li class="dropdown-item">${character.name}</li>`;
+                        resultsHtml += `<li class="dropdown-item"><a href="/character/?characterId=${character.id}">${character.name}</li>`;
                     });
-                    $('#result').html(resultsHtml).show();
+                    $('#results').html(resultsHtml).show();
                 },
                 error: function() {
-                    $('#result').html('<li class="dropdown-item text-danger">Error fetching results</li>').show();
+                    $('#results').html('<li class="dropdown-item text-danger">Error fetching results</li>').show();
                 }
             });
         } else {
-            $('#result').hide();
+            $('#results').hide();
         }
     });
 
     $(document).on('click', function(e) {
         if (!$(e.target).closest('.search').length) {
-            $('#result').hide();
+            $('#results').hide();
         }
     });
 });
