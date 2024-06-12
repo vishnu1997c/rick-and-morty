@@ -10,12 +10,12 @@ app.use("/css", express.static(path.join(__dirname, "node_modules/bootstrap/dist
 app.use("/js",express.static(path.join(__dirname, "node_modules/bootstrap/dist/js")));
 app.use("/js",express.static(path.join(__dirname, "node_modules/bootstrap/dist/js")));
 app.use("/js",express.static(path.join(__dirname, "public/js")));
+app.use('/', homeRouter);
 
 app.set("view engine", "pug");
 
-app.use('/', homeRouter);
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 const start = async () => {
   try {

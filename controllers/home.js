@@ -38,8 +38,19 @@ const singleCharacter = async (req, res) => {
     }
 }
 
+const search = async (req,res) => {
+    try {
+        const response = await axios.get(`https://rickandmortyapi.com/api/character/?name=${req.query.q}`);
+
+        res.json(response.data.results)
+    } catch(err) {
+        console.log(err);
+    }
+}
+
 
 module.exports = {
     getCharacter,
-    singleCharacter
+    singleCharacter,
+    search
 }

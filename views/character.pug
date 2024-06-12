@@ -4,6 +4,7 @@ block content
 	head
 		meta(charset= "utf-8")
 		meta(name="viewport" content="width=device-width, initial-scale=1")
+		link(rel='stylesheet', href='/css/bootstrap.min.css')
 		title Rick and Morty Characters
 	body
 		div
@@ -20,7 +21,14 @@ block content
 							form.d-flex(role='search')
 								input.form-control.me-2(type='search' placeholder='Search' aria-label='Search')
 								button.btn.btn-outline-success(type='submit') Search
-		div
+		div.d-flex.justify-content-center.m-2.p-2
 			-console.log(obj)
-			p name: #{obj.name}
-			p status: #{obj.status}
+			.card.mb-3
+				img(src=obj.image class="card-img-top")
+				.card-body
+					h5.card-title.p-2 #{obj.name}
+					p.card-text Species: #{obj.species}
+					p.card-text Status: #{obj.status}
+					p.card-text 
+						| Origin: 
+						a(href=obj.origin.url) #{obj.origin.name}
